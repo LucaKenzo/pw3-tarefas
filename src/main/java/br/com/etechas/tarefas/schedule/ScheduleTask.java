@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 @Service
-public class ScheduledTask {
+public class ScheduleTask {
 
     @Autowired
     private TarefaRepository tarefaRepository;
