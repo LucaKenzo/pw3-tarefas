@@ -36,4 +36,10 @@ public class TarefaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @PostMapping
+    public ResponseEntity<Tarefa> criarTarefa(@RequestBody Tarefa tarefa) {
+        Tarefa novaTarefa = service.salvar(tarefa);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
+    }
 }

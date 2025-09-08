@@ -40,4 +40,8 @@ public class TarefaService {
         repository.deleteById(id);
         return true;
     }
+
+    public Tarefa salvar(Tarefa tarefa){
+        return repository.save(tarefa);
+    }
 }
