@@ -42,4 +42,10 @@ public class TarefaController {
             return ResponseEntity.badRequest().header("ERROOOOOO", e.getMessage()).build();
         }
     }
+
+    @PostMapping
+    public ResponseEntity<Tarefa> criarTarefa(@RequestBody Tarefa tarefa) {
+        Tarefa novaTarefa = service.salvar(tarefa);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaTarefa);
+    }
 }
