@@ -62,10 +62,6 @@ public class TarefaService {
         }
         Tarefa tarefa = tarefaMapper.toEntity(dto);
         tarefa.setStatus(StatusEnum.PENDING);
-=======
-
-    public Tarefa salvar(Tarefa tarefa){
->>>>>>> 3befb515466308b5f84fd7aafd5c96d141f11f99
         return repository.save(tarefa);
     }
 }
