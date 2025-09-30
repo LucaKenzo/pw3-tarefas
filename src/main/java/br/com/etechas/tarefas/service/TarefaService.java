@@ -19,6 +19,7 @@ public class TarefaService {
 
     @Autowired
     private TarefaRepository repository;
+
     @Autowired
     private TarefaMapper tarefaMapper;
 

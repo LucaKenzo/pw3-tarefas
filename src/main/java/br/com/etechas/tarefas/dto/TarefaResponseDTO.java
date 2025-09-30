@@ -10,5 +10,7 @@ public record TarefaResponseDTO(
         String responsavel,
         LocalDate dataLimite,
         StatusEnum status
-) {
+        )
+{
+
 }

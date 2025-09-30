@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class Tarefa {
+
     @Id
     @Column(name = "ID_TASK")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
