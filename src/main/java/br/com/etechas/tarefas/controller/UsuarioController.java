@@ -1,7 +1,7 @@
 package br.com.etechas.tarefas.controller;
 
-import br.com.etechas.tarefas.dto.UsuarioaCadastroDTO;
-import br.com.etechas.tarefas.dto.UsuarioaResponseDTO;
+import br.com.etechas.tarefas.dto.UsuarioCadastroDTO;
+import br.com.etechas.tarefas.dto.UsuarioResponseDTO;
 import br.com.etechas.tarefas.mapper.UsuarioMapper;
 import br.com.etechas.tarefas.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class UsuarioController {
     UsuarioMapper usuarioMapper;
 
     @PostMapping
-    ResponseEntity<UsuarioaResponseDTO> registrar(@RequestBody UsuarioaCadastroDTO cadastro) {
+    ResponseEntity<UsuarioResponseDTO> registrar(@RequestBody UsuarioCadastroDTO cadastro) {
         usuarioService.registrar(cadastro);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

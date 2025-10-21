@@ -1,14 +1,15 @@
 package br.com.etechas.tarefas.service;
 
-import br.com.etechas.tarefas.dto.UsuarioaCadastroDTO;
-import br.com.etechas.tarefas.dto.UsuarioaResponseDTO;
-import br.com.etechas.tarefas.entity.Usuario;
+import br.com.etechas.tarefas.dto.UsuarioCadastroDTO;
+import br.com.etechas.tarefas.dto.UsuarioResponseDTO;
 import br.com.etechas.tarefas.mapper.UsuarioMapper;
 import br.com.etechas.tarefas.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class UsuarioService {
@@ -19,17 +20,26 @@ public class UsuarioService {
     @Autowired
     private UsuarioMapper usuarioMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public UsuarioaResponseDTO registrar(UsuarioaCadastroDTO dto) {
-        Optional<Usuario> cadastro = repository.findByUsername(dto.username());
 
-        if (cadastro.isPresent()) {
-            throw new RuntimeException("Nome de usuário ja existe");
+    public UsuarioResponseDTO registrar(UsuarioCadastroDTO cadastro) {
+        var existe = repository.findByUsername(cadastro.username());
+        if (existe.isPresent()) {
+            throw new RuntimeException("Nome de usuário já existe");
         }
 
-        Usuario usuario = usuarioMapper.toEntity(dto);
-        Usuario salvo = repository.save(usuario);
+        var senhaCifrada = passwordEncoder.encode(cadastro.password());
+        var entidade = usuarioMapper.toEntity(cadastro);
+        entidade.setPassword(senhaCifrada);
 
-        return UsuarioMapper.toUsuarioResponseDTO(salvo);
+        var salvo = repository.save(entidade);
+        return usuarioMapper.toUsuarioResponseDTO(salvo);
     }
+
+    public List<UsuarioResponseDTO> findAll() {
+        return usuarioMapper.toUsuarioRespondeDTOList(repository.findAll());
+    }
+
 }
